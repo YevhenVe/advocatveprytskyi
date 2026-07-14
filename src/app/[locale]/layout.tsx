@@ -6,6 +6,7 @@ import { hasLocale, NextIntlClientProvider } from "next-intl";
 import { getMessages, getTranslations, setRequestLocale } from "next-intl/server";
 import { Footer } from "@/components/Footer";
 import { Header } from "@/components/Header";
+import { OrganizationStructuredData } from "@/components/StructuredData";
 import { routing } from "@/i18n/routing";
 import "../globals.css";
 
@@ -36,9 +37,44 @@ export async function generateMetadata({
   const { locale } = await params;
   const t = await getTranslations({ locale, namespace: "Metadata" });
 
+  const baseUrl = "https://www.advokat-veprytskyi.com";
+  const path = "/" + locale;
+
   return {
+    metadataBase: new URL(baseUrl),
     title: t("siteName"),
     description: t("siteDescription"),
+    alternates: {
+      canonical: `${baseUrl}${path}`,
+      languages: {
+        ru: `${baseUrl}/ru`,
+        uk: `${baseUrl}/uk`,
+        "x-default": `${baseUrl}/ru`,
+      },
+    },
+    openGraph: {
+      title: t("siteName"),
+      description: t("siteDescription"),
+      url: `${baseUrl}${path}`,
+      siteName: "AV & KO — Адвокат Веприцкий",
+      locale: locale === "uk" ? "uk_UA" : "ru_UA",
+      alternateLocale: locale === "uk" ? "ru_UA" : "uk_UA",
+      type: "website",
+      images: [
+        {
+          url: `${baseUrl}/assets/logo.svg`,
+          width: 512,
+          height: 512,
+          alt: "AV & KO — Адвокат Веприцкий",
+        },
+      ],
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: t("siteName"),
+      description: t("siteDescription"),
+      images: [`${baseUrl}/assets/logo.svg`],
+    },
   };
 }
 
@@ -65,6 +101,7 @@ export default async function LocaleLayout({ children, params }: Props) {
     >
       <body className="flex min-h-full flex-col">
         <NextIntlClientProvider messages={messages}>
+          <OrganizationStructuredData />
           <Header />
           {children}
           <Footer />

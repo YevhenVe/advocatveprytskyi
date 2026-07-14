@@ -10,9 +10,43 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { locale } = await params;
   const t = await getTranslations({ locale, namespace: "Metadata" });
 
+  const baseUrl = "https://www.advokat-veprytskyi.com";
+  const path = `/${locale}/about`;
+
   return {
     title: t("aboutTitle"),
     description: t("aboutDescription"),
+    alternates: {
+      canonical: `${baseUrl}${path}`,
+      languages: {
+        ru: `${baseUrl}/ru/about`,
+        uk: `${baseUrl}/uk/about`,
+        "x-default": `${baseUrl}/ru/about`,
+      },
+    },
+    openGraph: {
+      title: t("aboutTitle"),
+      description: t("aboutDescription"),
+      url: `${baseUrl}${path}`,
+      siteName: "AV & KO — Адвокат Веприцкий",
+      locale: locale === "uk" ? "uk_UA" : "ru_UA",
+      alternateLocale: locale === "uk" ? "ru_UA" : "uk_UA",
+      type: "website",
+      images: [
+        {
+          url: `${baseUrl}/assets/logo.svg`,
+          width: 512,
+          height: 512,
+          alt: "AV & KO — Адвокат Веприцкий",
+        },
+      ],
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: t("aboutTitle"),
+      description: t("aboutDescription"),
+      images: [`${baseUrl}/assets/logo.svg`],
+    },
   };
 }
 
