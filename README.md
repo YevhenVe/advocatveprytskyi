@@ -1,35 +1,44 @@
-# Адвокат Веприцький
+# AV & KO Law Firm
 
-Сайт адвоката Веприцького на Next.js.
+Official website for the law firm "Адвокат Веприцький та компанія" (AV & KO). 
 
-## Розробка
+## Tech Stack
+
+* **Framework:** [Next.js](https://nextjs.org/)
+* **Language:** [TypeScript](https://www.typescriptlang.org/)
+* **Styling:** [Tailwind CSS](https://tailwindcss.com/)
+* **Deployment:** [Vercel](https://vercel.com/)
+
+## Getting Started
+
+First, install the dependencies:
 
 ```bash
+npm install
+# or
+yarn install
+# or
+pnpm install
+
+Then, run the development server:
 npm run dev
-```
+# or
+yarn dev
+# or
+pnpm dev
 
-Відкрийте [http://localhost:3000](http://localhost:3000).
+Open http://localhost:3002 with your browser to see the result.
 
-## Resend (контактна форма)
+Learn More
+To learn more about the technologies used in this project, take a look at the following resources:
 
-1. Створіть `.env.local` у корені проєкту.
-2. Додайте API-ключ Resend (замініть `re_xxxxxxxxx` на свій реальний ключ):
+Next.js Documentation - learn about Next.js features and API.
 
-```bash
-RESEND_API_KEY=re_xxxxxxxxx
-# optional, default for testing:
-RESEND_FROM_EMAIL=onboarding@resend.dev
-```
+TypeScript Documentation - learn about TypeScript.
 
-3. Перезапустіть `npm run dev`.
+Tailwind CSS Documentation - learn about utility-first styling.
 
-Листи з форми йдуть на `eugene.veprytskyi@gmail.com` через `POST /api/contact`.
+Deployment
+This project is optimized for deployment on the Vercel Platform, the creators of Next.js.
 
-## Скрипти
-
-| Команда | Опис |
-| --- | --- |
-| `npm run dev` | Dev-сервер |
-| `npm run build` | Production build |
-| `npm run start` | Production-сервер |
-| `npm run lint` | ESLint |
+For more details, check out the Next.js deployment documentation.
