@@ -1,10 +1,6 @@
 import { NextResponse } from "next/server";
 import { Resend } from "resend";
 
-const TO_EMAIL = "eugene.veprytskyi@gmail.com";
-const FROM_EMAIL =
-  process.env.RESEND_FROM_EMAIL ?? "onboarding@resend.dev";
-
 type ContactBody = {
   name?: string;
   email?: string;
@@ -25,11 +21,15 @@ function escapeHtml(value: string) {
 }
 
 export async function POST(request: Request) {
-  if (!process.env.RESEND_API_KEY) {
+  const TO_EMAIL = process.env.RESEND_TO_EMAIL;
+  const FROM_EMAIL = process.env.RESEND_FROM_EMAIL;
+  const API_KEY = process.env.RESEND_API_KEY;
+
+  if (!API_KEY || !TO_EMAIL || !FROM_EMAIL) {
     return NextResponse.json(
       {
         error:
-          "Missing RESEND_API_KEY. Add it to .env.local (not .env.example) and restart the dev server.",
+          "Missing environment variables. Add RESEND_API_KEY, RESEND_TO_EMAIL, and RESEND_FROM_EMAIL.",
       },
       { status: 500 },
     );
@@ -66,7 +66,7 @@ export async function POST(request: Request) {
   const safeMessage = escapeHtml(message).replaceAll("\n", "<br />");
 
   try {
-    const resend = new Resend(process.env.RESEND_API_KEY);
+    const resend = new Resend(API_KEY);
     const { data, error } = await resend.emails.send({
       from: FROM_EMAIL,
       to: TO_EMAIL,
