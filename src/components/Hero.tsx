@@ -272,7 +272,7 @@ export function Hero() {
           {statItems.map((stat) => (
             <div
               key={stat.key}
-              className="squircle min-w-[7.5rem] flex-1 px-3 py-2.5 text-center"
+              className="squircle min-w-[4.5rem] flex-1 px-0 py-2.5 text-center"
             >
               <div className="text-base font-semibold text-foreground dark:text-white">
                 {stat.value}
