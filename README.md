@@ -1,36 +1,35 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Адвокат Веприцький
 
-## Getting Started
+Сайт адвоката Веприцького на Next.js.
 
-First, run the development server:
+## Розробка
 
 ```bash
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Відкрийте [http://localhost:3000](http://localhost:3000).
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Resend (контактна форма)
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+1. Створіть `.env.local` у корені проєкту.
+2. Додайте API-ключ Resend (замініть `re_xxxxxxxxx` на свій реальний ключ):
 
-## Learn More
+```bash
+RESEND_API_KEY=re_xxxxxxxxx
+# optional, default for testing:
+RESEND_FROM_EMAIL=onboarding@resend.dev
+```
 
-To learn more about Next.js, take a look at the following resources:
+3. Перезапустіть `npm run dev`.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+Листи з форми йдуть на `eugene.veprytskyi@gmail.com` через `POST /api/contact`.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+## Скрипти
 
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+| Команда | Опис |
+| --- | --- |
+| `npm run dev` | Dev-сервер |
+| `npm run build` | Production build |
+| `npm run start` | Production-сервер |
+| `npm run lint` | ESLint |
