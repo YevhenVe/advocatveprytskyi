@@ -99,24 +99,35 @@ export function Contacts() {
               <p className="text-xs font-semibold tracking-[0.14em] text-accent uppercase dark:text-accent-light">
                 {t("phonesLabel")}
               </p>
-              <ul className="mt-3 space-y-2.5">
-                {phones.map((phone) => (
-                  <li
-                    key={phone.tel}
-                    className="flex flex-wrap items-center justify-between gap-x-3 gap-y-1"
-                  >
-                    <span className="text-xs font-medium text-foreground/55 dark:text-white/50">
-                      {phone.operator}
-                    </span>
-                    <a
-                      href={`tel:${phone.tel}`}
-                      className="text-sm font-medium tabular-nums text-foreground transition-colors hover:text-accent dark:text-white dark:hover:text-accent-light"
+                <div className="flex flex-row gap-2">
+                  <ul className="mt-3 space-y-2.5">
+                  {phones.map((phone) => (
+                    <li
+                      key={phone.tel}
+                      className="flex flex-wrap items-center justify-between gap-x-3 gap-y-1"
                     >
-                      {phone.display}
-                    </a>
-                  </li>
-                ))}
-              </ul>
+                      <span className="text-sm font-medium text-foreground/55 dark:text-white/50">
+                        {phone.operator}
+                      </span>
+                    </li>
+                  ))}
+                </ul>
+                <ul className="mt-3 space-y-2.5">
+                  {phones.map((phone) => (
+                    <li
+                      key={phone.tel}
+                      className="flex flex-wrap items-center justify-between gap-x-3 gap-y-1"
+                    >
+                      <a
+                        href={`tel:${phone.tel}`}
+                        className="text-sm font-medium tabular-nums text-foreground transition-colors hover:text-accent dark:text-white dark:hover:text-accent-light"
+                      >
+                        {phone.display}
+                      </a>
+                    </li>
+                  ))}
+                </ul>
+              </div>
             </motion.div>
           </div>
         </div>
