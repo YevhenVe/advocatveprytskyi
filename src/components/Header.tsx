@@ -47,7 +47,15 @@ export function Header() {
               alt={t("logoAlt")}
               width={140}
               height={52}
-              className="h-9 w-auto sm:h-10"
+              className="h-9 w-auto sm:h-10 dark:hidden"
+              priority
+            />
+            <Image
+              src="/assets/logodark.svg"
+              alt={t("logoAlt")}
+              width={140}
+              height={52}
+              className="hidden h-9 w-auto sm:h-10 dark:block"
               priority
             />
           </Link>
