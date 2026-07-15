@@ -25,11 +25,10 @@ const phones = [
   { operator: "Kyivstar", display: "(098) 709-46-68", tel: "+380987094668" },
   { operator: "Vodafone", display: "(099) 606-55-37", tel: "+380996065537" },
   { operator: "Kyivstar", display: "(098) 227-92-45", tel: "+380982279245" },
-  { operator: "Vodafone", display: "(057) 714-68-80", tel: "+380577146880" },
 ] as const;
 
 const mapsUrl = "https://maps.app.goo.gl/E7ToXd6M6J2akbAq6";
-const email = "vepricki2015@gmail.com";
+const email = "consult@advokat-veprytskyi.com";
 
 export function Footer() {
   const t = useTranslations("Footer");
