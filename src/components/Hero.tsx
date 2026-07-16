@@ -50,7 +50,7 @@ export function Hero() {
   return (
     <section
       id="golovna"
-      className="relative flex h-screen min-h-dvh items-center overflow-hidden"
+      className="relative flex min-h-dvh items-center overflow-hidden lg:h-screen"
     >
       <motion.div
         className="absolute inset-0"
@@ -92,7 +92,7 @@ export function Hero() {
       <div className="relative z-10 mx-auto grid w-full max-w-[1280px] items-end gap-10 px-4 py-24 sm:px-6 lg:grid-cols-[minmax(0,1.15fr)_minmax(0,0.85fr)] lg:gap-12">
         <div className="max-w-xl lg:max-w-2xl">
           <motion.div
-            className="mb-6 inline-flex max-w-full items-center gap-3 rounded-2xl border border-accent/20 bg-white/60 py-1.5 pl-1.5 pr-4 shadow-[0_4px_20px_rgba(15,23,42,0.06)] backdrop-blur-md dark:border-white/10 dark:bg-black/35 dark:shadow-[0_4px_20px_rgba(0,0,0,0.25)]"
+            className="mb-6 hidden max-w-full items-center gap-3 rounded-2xl border border-accent/20 bg-white/60 py-1.5 pl-1.5 pr-4 shadow-[0_4px_20px_rgba(15,23,42,0.06)] backdrop-blur-md sm:inline-flex dark:border-white/10 dark:bg-black/35 dark:shadow-[0_4px_20px_rgba(0,0,0,0.25)]"
             {...fadeUp(0.15)}
           >
             <span className="flex size-8 shrink-0 items-center justify-center rounded-xl bg-gradient-to-br from-accent-light to-accent text-[10px] font-bold tracking-wider text-white shadow-inner">
@@ -164,6 +164,26 @@ export function Hero() {
               </motion.li>
             ))}
           </ul>
+                <motion.div
+        className="mt-10 w-full lg:hidden"
+        {...fadeUp(0.8)}
+      >
+        <div className="mx-auto flex max-w-[1280px] gap-2 overflow-x-auto rounded-[22px] border border-white/50 bg-white/50 p-2 shadow-lg backdrop-blur-xl dark:border-white/10 dark:bg-black/40">
+          {statItems.map((stat) => (
+            <div
+              key={stat.key}
+              className="squircle min-w-[4.5rem] flex-1 px-0 py-2.5 text-center"
+            >
+              <div className="text-base font-semibold text-foreground dark:text-white">
+                {stat.value}
+              </div>
+              <div className="text-[10px] text-foreground/55 dark:text-white/55">
+                {t(`stats.${stat.key}`)}
+              </div>
+            </div>
+          ))}
+        </div>
+      </motion.div>
         </div>
 
         <div className="hidden lg:flex lg:items-end lg:justify-end">
@@ -244,28 +264,6 @@ export function Hero() {
           </div>
         </div>
       </div>
-
-      <motion.div
-        className="absolute inset-x-0 bottom-28 z-10 px-4 sm:px-6 lg:hidden"
-        {...fadeUp(0.8)}
-      >
-        <div className="mx-auto flex max-w-[1280px] gap-2 overflow-x-auto rounded-[22px] border border-white/50 bg-white/50 p-2 shadow-lg backdrop-blur-xl dark:border-white/10 dark:bg-black/40">
-          {statItems.map((stat) => (
-            <div
-              key={stat.key}
-              className="squircle min-w-[4.5rem] flex-1 px-0 py-2.5 text-center"
-            >
-              <div className="text-base font-semibold text-foreground dark:text-white">
-                {stat.value}
-              </div>
-              <div className="text-[10px] text-foreground/55 dark:text-white/55">
-                {t(`stats.${stat.key}`)}
-              </div>
-            </div>
-          ))}
-        </div>
-      </motion.div>
-
       <ScrollDownButton />
     </section>
   );
