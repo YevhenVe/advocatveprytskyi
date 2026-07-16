@@ -4,6 +4,7 @@ import { cookies } from "next/headers";
 import { notFound } from "next/navigation";
 import { hasLocale, NextIntlClientProvider } from "next-intl";
 import { getMessages, getTranslations, setRequestLocale } from "next-intl/server";
+import { CookieBanner } from "@/components/CookieBanner";
 import { Footer } from "@/components/Footer";
 import { Header } from "@/components/Header";
 import { OrganizationStructuredData } from "@/components/StructuredData";
@@ -105,6 +106,7 @@ export default async function LocaleLayout({ children, params }: Props) {
           <Header />
           {children}
           <Footer />
+          <CookieBanner />
         </NextIntlClientProvider>
       </body>
     </html>

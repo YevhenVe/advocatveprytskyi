@@ -55,7 +55,7 @@ export default async function ContactsPage({ params }: Props) {
   setRequestLocale(locale);
 
   return (
-    <main className="flex flex-1 flex-col bg-[#fefdfd] pt-[calc(var(--header-height)+1.25rem)] dark:bg-[#0c1929]">
+    <main className="min-h-dvh flex flex-1 flex-col bg-[#fefdfd] pt-[calc(var(--header-height)+1.25rem)] dark:bg-[#0c1929]">
       <Contacts />
     </main>
   );

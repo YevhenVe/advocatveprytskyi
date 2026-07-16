@@ -56,7 +56,7 @@ export default async function ServicesPage({ params }: Props) {
   setRequestLocale(locale);
 
   return (
-    <main className="flex flex-1 flex-col bg-[#edeef0] pt-[calc(var(--header-height)+1.25rem)] dark:bg-[#2d363d]">
+    <main className="min-h-dvh flex flex-1 flex-col bg-[#edeef0] pt-[calc(var(--header-height)+1.25rem)] dark:bg-[#2d363d]">
       <LegalServiceStructuredData />
       <Services />
     </main>

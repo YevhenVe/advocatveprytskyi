@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { getTranslations, setRequestLocale } from "next-intl/server";
 import { Sitemap } from "@/components/Sitemap";
+import { LegalServiceStructuredData } from "@/components/StructuredData";
 
 type Props = {
   params: Promise<{ locale: string }>;
@@ -56,7 +57,8 @@ export default async function SitemapPage({ params }: Props) {
   setRequestLocale(locale);
 
   return (
-    <main className="flex flex-1 flex-col bg-[#fefdfd] pt-[calc(var(--header-height)+1.25rem)] dark:bg-[#0c1929]">
+    <main className="min-h-dvh flex flex-1 flex-col bg-[#fefdfd] pt-[calc(var(--header-height)+1.25rem)] dark:bg-[#0c1929]">
+      <LegalServiceStructuredData/>
       <Sitemap />
     </main>
   );
