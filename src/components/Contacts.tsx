@@ -4,6 +4,7 @@ import { motion, useReducedMotion } from "framer-motion";
 import { useTranslations } from "next-intl";
 import { useEffect, useState } from "react";
 import { Link } from "@/i18n/navigation";
+import { SubmitButton } from "./SubmitButton";
 
 const easeOut = [0.22, 1, 0.36, 1] as const;
 
@@ -306,13 +307,9 @@ function ContactForm() {
         </p>
       )}
 
-      <button
-        type="submit"
-        disabled={status === "loading"}
-        className="inline-flex h-12 w-full cursor-pointer items-center justify-center rounded-full bg-gradient-to-b from-[#9fc4d0] to-accent px-8 text-sm font-semibold tracking-wide text-white uppercase shadow-[0_10px_30px_rgba(123,161,175,0.4)] transition-transform duration-300 hover:-translate-y-0.5 disabled:cursor-not-allowed disabled:opacity-60 sm:w-auto"
-      >
+      <SubmitButton disabled={status === "loading"}>
         {status === "loading" ? t("sending") : t("submit")}
-      </button>
+      </SubmitButton>
     </form>
   );
 }

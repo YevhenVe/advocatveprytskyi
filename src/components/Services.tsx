@@ -2,7 +2,8 @@
 
 import { motion, useReducedMotion } from "framer-motion";
 import { useTranslations } from "next-intl";
-import { Link } from "@/i18n/navigation";
+import { PrimaryButton } from "./PrimaryButton";
+import { SecondaryButton } from "./SecondaryButton";
 
 const easeOut = [0.22, 1, 0.36, 1] as const;
 const serviceKeys = [
@@ -79,18 +80,12 @@ export function Services() {
           className="mt-12 flex flex-wrap items-center gap-3"
           {...fadeUp(0.5)}
         >
-          <Link
-            href="/contacts"
-            className="inline-flex h-12 items-center justify-center rounded-full bg-gradient-to-b from-[#9fc4d0] to-accent px-8 text-sm font-semibold tracking-wide text-white uppercase shadow-[0_10px_30px_rgba(123,161,175,0.4)] transition-transform duration-300 hover:-translate-y-0.5"
-          >
+          <PrimaryButton href="/contacts">
             {t("ctaConsult")}
-          </Link>
-          <Link
-            href="/about"
-            className="inline-flex h-12 items-center justify-center rounded-full border border-foreground/10 bg-white/40 px-6 text-sm font-medium text-foreground/80 backdrop-blur-md transition-all duration-300 hover:border-accent/40 hover:bg-white/70 dark:border-white/15 dark:bg-white/5 dark:text-white/85"
-          >
+          </PrimaryButton>
+          <SecondaryButton href="/about">
             {t("ctaTeam")}
-          </Link>
+          </SecondaryButton>
         </motion.div>
       </div>
     </section>

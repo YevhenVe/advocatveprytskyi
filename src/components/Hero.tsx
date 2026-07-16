@@ -3,8 +3,9 @@
 import Image from "next/image";
 import { motion, useReducedMotion } from "framer-motion";
 import { useTranslations } from "next-intl";
-import { Link } from "@/i18n/navigation";
 import { ScrollDownButton } from "./ScrollDownButton";
+import { PrimaryButton } from "./PrimaryButton";
+import { SecondaryButton } from "./SecondaryButton";
 
 const easeOut = [0.22, 1, 0.36, 1] as const;
 
@@ -49,7 +50,7 @@ export function Hero() {
   return (
     <section
       id="golovna"
-      className="relative flex h-screen min-h-[100vh] items-center overflow-hidden"
+      className="relative flex h-screen min-h-dvh items-center overflow-hidden"
     >
       <motion.div
         className="absolute inset-0"
@@ -134,38 +135,18 @@ export function Hero() {
               whileHover={reduceMotion ? undefined : { y: -2, scale: 1.02 }}
               whileTap={reduceMotion ? undefined : { scale: 0.98 }}
             >
-              <Link
-                href="/contacts"
-                className={[
-                  "group relative inline-flex h-12 items-center justify-center overflow-hidden sm:h-14",
-                  "rounded-full px-9 text-sm font-semibold tracking-wide text-white uppercase",
-                  "bg-gradient-to-b from-[#9fc4d0] to-accent",
-                  "shadow-[0_10px_30px_rgba(123,161,175,0.45),0_4px_12px_rgba(0,0,0,0.12),inset_0_1px_0_rgba(255,255,255,0.45)]",
-                  "transition-shadow duration-300 ease-out",
-                  "hover:from-accent-light hover:to-[#8fb6c4]",
-                  "hover:shadow-[0_16px_40px_rgba(123,161,175,0.5),0_8px_18px_rgba(0,0,0,0.16),inset_0_1px_0_rgba(255,255,255,0.55)]",
-                  "focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent",
-                  "dark:focus-visible:outline-accent-light",
-                ].join(" ")}
-              >
-                <span className="relative z-10">{t("ctaContact")}</span>
-                <span
-                  className="pointer-events-none absolute inset-0 bg-gradient-to-t from-transparent via-white/0 to-white/25 opacity-80 transition-opacity duration-300 group-hover:opacity-100"
-                  aria-hidden
-                />
-              </Link>
+              <PrimaryButton href="/contacts">
+                {t("ctaContact")}
+              </PrimaryButton>
             </motion.div>
 
             <motion.div
               whileHover={reduceMotion ? undefined : { y: -2, scale: 1.02 }}
               whileTap={reduceMotion ? undefined : { scale: 0.98 }}
             >
-              <Link
-                href="/services"
-                className="inline-flex h-12 items-center justify-center rounded-full border border-foreground/10 bg-white/40 px-6 text-sm font-medium text-foreground/80 backdrop-blur-md transition-colors duration-300 hover:border-accent/40 hover:bg-white/70 hover:text-foreground sm:h-14 dark:border-white/15 dark:bg-white/5 dark:text-white/85 dark:hover:border-accent-light/40 dark:hover:bg-white/10 dark:hover:text-white"
-              >
+              <SecondaryButton href="/services">
                 {t("ctaServices")}
-              </Link>
+              </SecondaryButton>
             </motion.div>
           </motion.div>
 
