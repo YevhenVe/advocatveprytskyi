@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { motion, useReducedMotion } from "framer-motion";
+import { motion } from "framer-motion";
 import { useTranslations } from "next-intl";
 
 const pageLinks = [
@@ -26,17 +26,13 @@ const easeOut = [0.22, 1, 0.36, 1] as const;
 export function Sitemap() {
   const t = useTranslations("Sitemap");
   const tServices = useTranslations("Services.items");
-  const reduceMotion = useReducedMotion();
 
-  const fadeUp = (delay = 0) =>
-    reduceMotion
-      ? { initial: false as const, whileInView: { opacity: 1, y: 0 } }
-      : {
-          initial: { opacity: 0, y: 32 },
-          whileInView: { opacity: 1, y: 0 },
-          viewport: { once: true, amount: 0.25 },
-          transition: { duration: 0.7, delay, ease: easeOut },
-        };
+  const fadeUp = (delay = 0) => ({
+    initial: { opacity: 0, y: 32 },
+    whileInView: { opacity: 1, y: 0 },
+    viewport: { once: true, amount: 0.25 },
+    transition: { duration: 0.7, delay, ease: easeOut },
+  });
 
   return (
     <section className="relative overflow-hidden bg-[#fefdfd] py-20 sm:py-28 dark:bg-[#0c1929]">
@@ -93,18 +89,16 @@ export function Sitemap() {
               {serviceKeys.map((key, index) => (
                 <motion.li
                   key={key}
-                  {...(reduceMotion
-                    ? {}
-                    : {
-                        initial: { opacity: 0, y: 16 },
-                        whileInView: { opacity: 1, y: 0 },
-                        viewport: { once: true },
-                        transition: {
-                          duration: 0.45,
-                          delay: 0.4 + index * 0.06,
-                          ease: easeOut,
-                        },
-                      })}
+                  {...{
+                    initial: { opacity: 0, y: 16 },
+                    whileInView: { opacity: 1, y: 0 },
+                    viewport: { once: true },
+                    transition: {
+                      duration: 0.45,
+                      delay: 0.4 + index * 0.06,
+                      ease: easeOut,
+                    },
+                  }}
                 >
                   <Link
                     href="/services"
@@ -120,4 +114,4 @@ export function Sitemap() {
       </div>
     </section>
   );
-}
+}

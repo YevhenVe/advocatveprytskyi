@@ -1,7 +1,7 @@
 "use client";
 
 import Image from "next/image";
-import { motion, useReducedMotion } from "framer-motion";
+import { motion } from "framer-motion";
 import { useTranslations } from "next-intl";
 import { ScrollDownButton } from "./ScrollDownButton";
 import { PrimaryButton } from "./PrimaryButton";
@@ -18,34 +18,24 @@ const statItems = [
 
 export function Hero() {
   const t = useTranslations("Hero");
-  const reduceMotion = useReducedMotion();
 
-  const fadeUp = (delay = 0) =>
-    reduceMotion
-      ? { initial: false, animate: { opacity: 1, y: 0 } }
-      : {
-          initial: { opacity: 0, y: 28 },
-          animate: { opacity: 1, y: 0 },
-          transition: { duration: 0.7, delay, ease: easeOut },
-        };
+  const fadeUp = (delay = 0) => ({
+    initial: { opacity: 0, y: 28 },
+    animate: { opacity: 1, y: 0 },
+    transition: { duration: 0.7, delay, ease: easeOut },
+  });
 
-  const fadeIn = (delay = 0) =>
-    reduceMotion
-      ? { initial: false, animate: { opacity: 1 } }
-      : {
-          initial: { opacity: 0 },
-          animate: { opacity: 1 },
-          transition: { duration: 0.9, delay, ease: easeOut },
-        };
+  const fadeIn = (delay = 0) => ({
+    initial: { opacity: 0 },
+    animate: { opacity: 1 },
+    transition: { duration: 0.9, delay, ease: easeOut },
+  });
 
-  const slideRight = (delay = 0) =>
-    reduceMotion
-      ? { initial: false, animate: { opacity: 1, x: 0, y: 0 } }
-      : {
-          initial: { opacity: 0, x: 36, y: 16 },
-          animate: { opacity: 1, x: 0, y: 0 },
-          transition: { duration: 0.75, delay, ease: easeOut },
-        };
+  const slideRight = (delay = 0) => ({
+    initial: { opacity: 0, x: 36, y: 16 },
+    animate: { opacity: 1, x: 0, y: 0 },
+    transition: { duration: 0.75, delay, ease: easeOut },
+  });
 
   return (
     <section
@@ -54,13 +44,11 @@ export function Hero() {
     >
       <motion.div
         className="absolute inset-0"
-        {...(reduceMotion
-          ? { initial: false, animate: { opacity: 1, scale: 1 } }
-          : {
-              initial: { opacity: 0, scale: 1.06 },
-              animate: { opacity: 1, scale: 1 },
-              transition: { duration: 1.2, ease: easeOut },
-            })}
+        {...{
+          initial: { opacity: 0, scale: 1.06 },
+          animate: { opacity: 1, scale: 1 },
+          transition: { duration: 1.2, ease: easeOut },
+        }}
       >
         <Image
           src="/assets/herobackground.jpg"
@@ -132,8 +120,8 @@ export function Hero() {
             {...fadeUp(0.64)}
           >
             <motion.div
-              whileHover={reduceMotion ? undefined : { y: -2, scale: 1.02 }}
-              whileTap={reduceMotion ? undefined : { scale: 0.98 }}
+              whileHover={{ y: -2, scale: 1.02 }}
+              whileTap={{ scale: 0.98 }}
             >
               <PrimaryButton href="/contacts">
                 {t("ctaContact")}
@@ -141,8 +129,8 @@ export function Hero() {
             </motion.div>
 
             <motion.div
-              whileHover={reduceMotion ? undefined : { y: -2, scale: 1.02 }}
-              whileTap={reduceMotion ? undefined : { scale: 0.98 }}
+              whileHover={{ y: -2, scale: 1.02 }}
+              whileTap={{ scale: 0.98 }}
             >
               <SecondaryButton href="/services">
                 {t("ctaServices")}
@@ -156,9 +144,7 @@ export function Hero() {
                 key={key}
                 className="rounded-full border border-foreground/10 bg-white/45 px-3.5 py-1.5 text-xs font-medium text-foreground/65 backdrop-blur-md dark:border-white/10 dark:bg-white/10 dark:text-white/70"
                 {...fadeUp(0.72 + index * 0.08)}
-                whileHover={
-                  reduceMotion ? undefined : { y: -2, scale: 1.04 }
-                }
+                whileHover={{ y: -2, scale: 1.04 }}
               >
                 {t(`highlights.${key}`)}
               </motion.li>
@@ -191,15 +177,11 @@ export function Hero() {
             <motion.div
               className="rounded-[28px] border border-white/50 bg-white/45 p-6 shadow-[0_20px_60px_rgba(15,23,42,0.12),inset_0_1px_0_rgba(255,255,255,0.7)] backdrop-blur-xl dark:border-white/10 dark:bg-black/35 dark:shadow-[0_20px_60px_rgba(0,0,0,0.35),inset_0_1px_0_rgba(255,255,255,0.08)]"
               {...slideRight(0.55)}
-              whileHover={
-                reduceMotion
-                  ? undefined
-                  : {
-                      y: -14,
-                      scale: 1.03,
-                      transition: { type: "spring", stiffness: 320, damping: 18 },
-                    }
-              }
+              whileHover={{
+                y: -14,
+                scale: 1.03,
+                transition: { type: "spring", stiffness: 320, damping: 18 },
+              }}
             >
               <p className="text-xs font-semibold tracking-[0.18em] text-accent uppercase dark:text-accent-light">
                 {t("whyTitle")}
@@ -213,17 +195,15 @@ export function Hero() {
                   <motion.div
                     key={stat.key}
                     className="rounded-2xl border border-white/60 bg-white/55 px-2 py-3 text-center shadow-sm dark:border-white/10 dark:bg-white/5"
-                    {...(reduceMotion
-                      ? { initial: false, animate: { opacity: 1, y: 0 } }
-                      : {
-                          initial: { opacity: 0, y: 12 },
-                          animate: { opacity: 1, y: 0 },
-                          transition: {
-                            duration: 0.45,
-                            delay: 0.85 + index * 0.1,
-                            ease: easeOut,
-                          },
-                        })}
+                    {...{
+                      initial: { opacity: 0, y: 12 },
+                      animate: { opacity: 1, y: 0 },
+                      transition: {
+                        duration: 0.45,
+                        delay: 0.85 + index * 0.1,
+                        ease: easeOut,
+                      },
+                    }}
                   >
                     <div className="text-lg font-semibold tracking-tight text-foreground dark:text-white">
                       {stat.value}
@@ -239,15 +219,11 @@ export function Hero() {
             <motion.div
               className="flex items-center gap-3 rounded-[24px] border border-white/50 bg-white/40 px-4 py-3 shadow-[0_12px_40px_rgba(15,23,42,0.08)] backdrop-blur-xl dark:border-white/10 dark:bg-black/30 dark:shadow-[0_12px_40px_rgba(0,0,0,0.3)]"
               {...slideRight(0.75)}
-              whileHover={
-                reduceMotion
-                  ? undefined
-                  : {
-                      y: -12,
-                      scale: 1.03,
-                      transition: { type: "spring", stiffness: 320, damping: 18 },
-                    }
-              }
+              whileHover={{
+                y: -12,
+                scale: 1.03,
+                transition: { type: "spring", stiffness: 320, damping: 18 },
+              }}
             >
               <div className="flex size-11 shrink-0 items-center justify-center rounded-2xl bg-gradient-to-br from-accent-light to-accent text-white shadow-md">
                 <ShieldIcon className="size-5" />
