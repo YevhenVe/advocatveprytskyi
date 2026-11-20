@@ -1,7 +1,7 @@
 "use client";
 
 import Image from "next/image";
-import { motion, useReducedMotion } from "framer-motion";
+import { motion } from "framer-motion";
 import { useTranslations } from "next-intl";
 
 const easeOut = [0.22, 1, 0.36, 1] as const;
@@ -9,27 +9,20 @@ const valueKeys = ["trust", "privacy", "individual"] as const;
 
 export function About() {
   const t = useTranslations("About");
-  const reduceMotion = useReducedMotion();
 
-  const fadeUp = (delay = 0) =>
-    reduceMotion
-      ? { initial: false as const, whileInView: { opacity: 1, y: 0 } }
-      : {
-          initial: { opacity: 0, y: 32 },
-          whileInView: { opacity: 1, y: 0 },
-          viewport: { once: true, amount: 0.25 },
-          transition: { duration: 0.7, delay, ease: easeOut },
-        };
+  const fadeUp = (delay = 0) => ({
+    initial: { opacity: 0, y: 32 },
+    whileInView: { opacity: 1, y: 0 },
+    viewport: { once: true, amount: 0.25 },
+    transition: { duration: 0.7, delay, ease: easeOut },
+  });
 
-  const slideIn = (delay = 0) =>
-    reduceMotion
-      ? { initial: false as const, whileInView: { opacity: 1, x: 0 } }
-      : {
-          initial: { opacity: 0, x: 40 },
-          whileInView: { opacity: 1, x: 0 },
-          viewport: { once: true, amount: 0.25 },
-          transition: { duration: 0.8, delay, ease: easeOut },
-        };
+  const slideIn = (delay = 0) => ({
+    initial: { opacity: 0, x: 40 },
+    whileInView: { opacity: 1, x: 0 },
+    viewport: { once: true, amount: 0.25 },
+    transition: { duration: 0.8, delay, ease: easeOut },
+  });
 
   return (
     <section className="relative overflow-hidden bg-[#fefdfd] py-20 sm:py-28 dark:bg-[#0c1929]">
@@ -65,18 +58,16 @@ export function About() {
               <motion.li
                 key={key}
                 className="rounded-full border border-foreground/10 bg-white/55 px-4 py-2 text-xs font-medium text-foreground/70 shadow-sm backdrop-blur-md dark:border-white/10 dark:bg-white/10 dark:text-white/75"
-                {...(reduceMotion
-                  ? {}
-                  : {
-                      initial: { opacity: 0, y: 12 },
-                      whileInView: { opacity: 1, y: 0 },
-                      viewport: { once: true },
-                      transition: {
-                        duration: 0.45,
-                        delay: 0.35 + index * 0.08,
-                        ease: easeOut,
-                      },
-                    })}
+                {...{
+                  initial: { opacity: 0, y: 12 },
+                  whileInView: { opacity: 1, y: 0 },
+                  viewport: { once: true },
+                  transition: {
+                    duration: 0.45,
+                    delay: 0.35 + index * 0.08,
+                    ease: easeOut,
+                  },
+                }}
               >
                 {t(`values.${key}`)}
               </motion.li>
@@ -104,14 +95,12 @@ export function About() {
 
           <motion.div
             className="absolute -bottom-4 left-4 right-4 rounded-[22px] border border-white/50 bg-white/70 px-4 py-3 shadow-[0_12px_40px_rgba(15,23,42,0.12)] backdrop-blur-xl sm:left-6 sm:right-auto sm:max-w-[16rem] dark:border-white/10 dark:bg-black/50 dark:shadow-[0_12px_40px_rgba(0,0,0,0.35)]"
-            {...(reduceMotion
-              ? {}
-              : {
-                  initial: { opacity: 0, y: 20 },
-                  whileInView: { opacity: 1, y: 0 },
-                  viewport: { once: true },
-                  transition: { duration: 0.6, delay: 0.45, ease: easeOut },
-                })}
+            {...{
+              initial: { opacity: 0, y: 20 },
+              whileInView: { opacity: 1, y: 0 },
+              viewport: { once: true },
+              transition: { duration: 0.6, delay: 0.45, ease: easeOut },
+            }}
           >
             <p className="text-xs font-semibold tracking-[0.16em] text-accent uppercase dark:text-accent-light">
               {t("cardBrand")}

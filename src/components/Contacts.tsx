@@ -1,6 +1,6 @@
 "use client";
 
-import { motion, useReducedMotion } from "framer-motion";
+import { motion } from "framer-motion";
 import { useTranslations } from "next-intl";
 import { useEffect, useState } from "react";
 import { Link } from "@/i18n/navigation";
@@ -19,17 +19,13 @@ const phones = [
 
 export function Contacts() {
   const t = useTranslations("Contacts");
-  const reduceMotion = useReducedMotion();
 
-  const fadeUp = (delay = 0) =>
-    reduceMotion
-      ? { initial: false as const, whileInView: { opacity: 1, y: 0 } }
-      : {
-          initial: { opacity: 0, y: 28 },
-          whileInView: { opacity: 1, y: 0 },
-          viewport: { once: true, amount: 0.2 },
-          transition: { duration: 0.65, delay, ease: easeOut },
-        };
+  const fadeUp = (delay = 0) => ({
+    initial: { opacity: 0, y: 28 },
+    whileInView: { opacity: 1, y: 0 },
+    viewport: { once: true, amount: 0.2 },
+    transition: { duration: 0.65, delay, ease: easeOut },
+  });
 
   return (
     <section className="relative overflow-hidden bg-[#fefdfd] py-20 sm:py-28 dark:bg-[#0c1929]">

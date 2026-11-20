@@ -1,6 +1,6 @@
 "use client";
 
-import { motion, useReducedMotion } from "framer-motion";
+import { motion } from "framer-motion";
 import { useTranslations } from "next-intl";
 import { PrimaryButton } from "./PrimaryButton";
 import { SecondaryButton } from "./SecondaryButton";
@@ -17,17 +17,13 @@ const serviceKeys = [
 
 export function Services() {
   const t = useTranslations("Services");
-  const reduceMotion = useReducedMotion();
 
-  const fadeUp = (delay = 0) =>
-    reduceMotion
-      ? { initial: false as const, whileInView: { opacity: 1, y: 0 } }
-      : {
-          initial: { opacity: 0, y: 28 },
-          whileInView: { opacity: 1, y: 0 },
-          viewport: { once: true, amount: 0.2 },
-          transition: { duration: 0.65, delay, ease: easeOut },
-        };
+  const fadeUp = (delay = 0) => ({
+    initial: { opacity: 0, y: 28 },
+    whileInView: { opacity: 1, y: 0 },
+    viewport: { once: true, amount: 0.2 },
+    transition: { duration: 0.65, delay, ease: easeOut },
+  });
 
   return (
     <section className="relative overflow-hidden bg-[#edeef0] py-20 sm:py-28 dark:bg-[#2d363d]">
