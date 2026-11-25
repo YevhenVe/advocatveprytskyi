@@ -1,14 +1,16 @@
+import { useTranslations } from "next-intl";
+
 const baseUrl = "https://www.advokat-veprytskyi.com";
 
 export function OrganizationStructuredData() {
+  const t = useTranslations("Metadata");
   const jsonLd = {
     "@context": "https://schema.org",
     "@type": "Organization",
     name: "AV & KO — Адвокат Веприцкий",
     url: baseUrl,
     logo: `${baseUrl}/assets/logo.svg`,
-    description:
-      "Команда адвокатов и юристов «AV & KO» — надёжная правовая защита бизнеса и личных интересов.",
+    description: t("homeDescription"),
     address: {
       "@type": "PostalAddress",
       streetAddress: "проспект Аэрокосмический, 1, офис 406",
@@ -36,6 +38,7 @@ export function OrganizationStructuredData() {
 }
 
 export function LegalServiceStructuredData() {
+  const t = useTranslations("Metadata");
   const jsonLd = {
     "@context": "https://schema.org",
     "@type": "LegalService",
@@ -43,8 +46,7 @@ export function LegalServiceStructuredData() {
     url: baseUrl,
     logo: `${baseUrl}/assets/logo.svg`,
     image: `${baseUrl}/assets/logo.svg`,
-    description:
-      "Команда опытных адвокатов и юристов «AV & KO» — надёжная правовая защита бизнеса и личных интересов.",
+    description: t("homeDescription"),
     address: {
       "@type": "PostalAddress",
       streetAddress: "проспект Аэрокосмический, 1, офис 406",
@@ -64,4 +66,4 @@ export function LegalServiceStructuredData() {
       dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
     />
   );
-}
+}

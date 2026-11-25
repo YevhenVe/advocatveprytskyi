@@ -1,9 +1,10 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { useTranslations } from "next-intl";
+import { useLocale, useTranslations } from "next-intl";
 import { useEffect, useState } from "react";
 import { Link } from "@/i18n/navigation";
+import { CONSENT_TEXT, POLICY_VERSION } from "@/content/legal/owner";
 import { SubmitButton } from "./SubmitButton";
 
 const easeOut = [0.22, 1, 0.36, 1] as const;
@@ -169,6 +170,9 @@ function ContactForm() {
     "idle",
   );
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
+  const [consent, setConsent] = useState(false);
+  const locale = useLocale() === "ru" ? "ru" : "uk";
+  const consentText = CONSENT_TEXT[locale];
 
   useEffect(() => {
     setMounted(true);
@@ -186,6 +190,9 @@ function ContactForm() {
       name: String(formData.get("name") ?? "").trim(),
       email: String(formData.get("email") ?? "").trim(),
       message: String(formData.get("message") ?? "").trim(),
+      consent: formData.get("consent") === "on",
+      policyVersion: POLICY_VERSION,
+      locale,
     };
 
     try {
@@ -207,6 +214,7 @@ function ContactForm() {
 
       setStatus("success");
       form.reset();
+      setConsent(false);
     } catch {
       setStatus("error");
       setErrorMessage(t("errorGeneric"));
@@ -291,6 +299,28 @@ function ContactForm() {
         />
       </div>
 
+      <label className="flex cursor-pointer items-start gap-3 text-sm leading-relaxed text-foreground/75 dark:text-white/75">
+        <input
+          type="checkbox"
+          name="consent"
+          required
+          checked={consent}
+          onChange={(event) => setConsent(event.target.checked)}
+          disabled={status === "loading"}
+          className="mt-0.5 size-4 shrink-0 cursor-pointer accent-accent"
+        />
+        <span>
+          {consentText.before}{" "}
+          <Link
+            href="/privacy"
+            target="_blank"
+            className="font-medium text-accent underline underline-offset-2 transition-colors hover:text-foreground dark:text-accent-light dark:hover:text-white"
+          >
+            {consentText.link}
+          </Link>
+        </span>
+      </label>
+
       {status === "success" && (
         <p className="text-sm font-medium text-emerald-600 dark:text-emerald-400" role="status">
           {t("success")}
@@ -303,7 +333,7 @@ function ContactForm() {
         </p>
       )}
 
-      <SubmitButton disabled={status === "loading"}>
+      <SubmitButton disabled={status === "loading" || !consent}>
         {status === "loading" ? t("sending") : t("submit")}
       </SubmitButton>
     </form>
