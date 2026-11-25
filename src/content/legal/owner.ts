@@ -2,8 +2,9 @@
  * Single source of truth for the legal details used in the policies,
  * the footer and the contact-form consent record.
  *
- * TODO(before release): replace every "[...]" placeholder with the real
- * details of the data owner (володілець персональних даних).
+ * The data owner (володілець персональних даних) is identified by the
+ * practice name, address and email. When the full name of the owner is
+ * settled, put it in DATA_OWNER.name and bump POLICY_VERSION / POLICY_DATE.
  */
 
 /** Bump this whenever the privacy policy text changes. Sent with every consent. */
@@ -23,13 +24,11 @@ export const RETENTION_MONTHS = 12;
 
 export const DATA_OWNER = {
   uk: {
-    name: "[ПІБ адвоката / найменування володільця]",
-    details: "[свідоцтво про право на заняття адвокатською діяльністю № ___ від ___, видане ___]",
+    name: "адвокатська практика «AV & KO»",
     address: "м. Харків, проспект Аерокосмічний, 1, офіс 406, 4 поверх",
   },
   ru: {
-    name: "[ФИО адвоката / наименование владельца]",
-    details: "[свидетельство о праве на занятие адвокатской деятельностью № ___ от ___, выдано ___]",
+    name: "адвокатская практика «AV & KO»",
     address: "г. Харьков, проспект Аэрокосмический, 1, офис 406, 4 этаж",
   },
 } as const;
