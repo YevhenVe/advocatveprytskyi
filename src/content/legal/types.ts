@@ -15,6 +15,8 @@ export type LegalDocumentContent = {
   titleBefore: string;
   titleAccent: string;
   effectiveLabel: string;
+  /** Real date the document first appeared; omit to hide the line. */
+  effectiveDate?: string;
   updatedLabel: string;
   intro: string;
   sections: LegalSection[];

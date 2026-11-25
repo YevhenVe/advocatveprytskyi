@@ -8,6 +8,7 @@ const uk: LegalDocumentContent = {
   titleBefore: "Політика використання",
   titleAccent: " файлів cookie",
   effectiveLabel: "Дата набрання чинності",
+  effectiveDate: "16 липня 2026 року",
   updatedLabel: "Останнє оновлення",
   intro: `Цей документ пояснює, які файли cookie та подібні технології використовує сайт ${SITE_URL} (далі — «Сайт») і як ними керувати.`,
   sections: [
@@ -64,6 +65,7 @@ const ru: LegalDocumentContent = {
   titleBefore: "Политика использования",
   titleAccent: " файлов cookie",
   effectiveLabel: "Дата вступления в силу",
+  effectiveDate: "16 июля 2026 года",
   updatedLabel: "Последнее обновление",
   intro: `Этот документ объясняет, какие файлы cookie и подобные технологии использует сайт ${SITE_URL} (далее — «Сайт») и как ими управлять.`,
   sections: [

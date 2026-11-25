@@ -59,9 +59,11 @@ export function LegalDocument({ content, locale }: Props) {
             <span className="text-accent">{content.titleAccent}</span>
           </h1>
           <div className="mt-4 space-y-1 text-sm text-foreground/60">
-            <p>
-              {content.effectiveLabel}: {date}
-            </p>
+            {content.effectiveDate && (
+              <p>
+                {content.effectiveLabel}: {content.effectiveDate}
+              </p>
+            )}
             <p>
               {content.updatedLabel}: {date}
             </p>
