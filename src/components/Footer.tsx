@@ -12,6 +12,11 @@ const navHrefs = [
   { href: "/sitemap", key: "sitemap" as const },
 ];
 
+const legalLinks = [
+  { href: "/privacy", key: "privacy" as const },
+  { href: "/cookies", key: "cookies" as const },
+] as const;
+
 const serviceKeys = [
   "criminal",
   "civil",
@@ -130,9 +135,22 @@ export function Footer() {
         </div>
 
         <div className="mt-12 flex flex-col gap-3 border-t border-white/10 pt-6 sm:flex-row sm:items-center sm:justify-between">
-          <p className="text-xs text-white/45 sm:text-sm">
-            {t("copyright", { year })}
-          </p>
+          <div className="flex flex-col gap-2 sm:flex-row sm:items-center sm:gap-5">
+            <p className="text-xs text-white/45 sm:text-sm">
+              {t("copyright", { year })}
+            </p>
+            <nav className="flex flex-wrap gap-x-4 gap-y-1 text-xs sm:text-sm">
+              {legalLinks.map((link) => (
+                <Link
+                  key={link.href}
+                  href={link.href}
+                  className="text-white/60 underline-offset-2 transition-colors hover:text-white hover:underline"
+                >
+                  {t(link.key)}
+                </Link>
+              ))}
+            </nav>
+          </div>
           <p className="text-xs text-white/45 sm:text-sm">
             {t("developedBy")}{" "}
             <a

@@ -10,6 +10,8 @@ const staticPages = [
   { path: "services", priority: 0.9 },
   { path: "contacts", priority: 0.7 },
   { path: "sitemap", priority: 0.5 },
+  { path: "privacy", priority: 0.3 },
+  { path: "cookies", priority: 0.3 },
 ] as const;
 
 export default function sitemap(): MetadataRoute.Sitemap {
@@ -36,4 +38,4 @@ export default function sitemap(): MetadataRoute.Sitemap {
   }
 
   return entries;
-}
+}

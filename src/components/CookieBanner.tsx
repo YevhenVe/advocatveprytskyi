@@ -46,7 +46,7 @@ export function CookieBanner() {
         <p className="text-sm leading-relaxed text-foreground/85 sm:flex-1">
           {t("message")}{" "}
           <Link
-            href="/privacy"
+            href="/cookies"
             className="text-accent underline transition-colors hover:text-accent-light"
           >
             {t("privacyLink")}
@@ -77,4 +77,4 @@ export function CookieBanner() {
       </div>
     </div>
   );
-}
+}

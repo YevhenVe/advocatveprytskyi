@@ -10,6 +10,8 @@ const pageLinks = [
   { href: "/services", key: "servicesList" as const },
   { href: "/contacts", key: "contacts" as const },
   { href: "/sitemap", key: "sitemap" as const },
+  { href: "/privacy", key: "privacy" as const },
+  { href: "/cookies", key: "cookies" as const },
 ] as const;
 
 const serviceKeys = [
