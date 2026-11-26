@@ -9,7 +9,22 @@ type ContactBody = {
   consent?: boolean;
   policyVersion?: string;
   locale?: string;
+  website?: string;
+  elapsedMs?: number;
 };
+
+/** A person can't fill in name, email and message faster than this. */
+const MIN_FILL_MS = 3000;
+
+/**
+ * Bot check: the hidden honeypot field is filled in, or the form was sent
+ * too fast, or the request skipped the form entirely (no timing at all).
+ */
+function looksLikeBot(body: ContactBody) {
+  if (body.website) return true;
+  const elapsed = body.elapsedMs;
+  return typeof elapsed !== "number" || !Number.isFinite(elapsed) || elapsed < MIN_FILL_MS;
+}
 
 function isValidEmail(email: string) {
   return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
@@ -45,6 +60,15 @@ export async function POST(request: Request) {
     body = (await request.json()) as ContactBody;
   } catch {
     return NextResponse.json({ error: "Invalid JSON body" }, { status: 400 });
+  }
+
+  // Pretend success so bots don't learn they were caught; nothing is sent.
+  if (looksLikeBot(body)) {
+    console.warn("Contact form: bot submission dropped", {
+      honeypot: Boolean(body.website),
+      elapsedMs: body.elapsedMs,
+    });
+    return NextResponse.json({ ok: true });
   }
 
   const name = body.name?.trim() ?? "";
