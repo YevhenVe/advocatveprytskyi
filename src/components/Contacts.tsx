@@ -2,7 +2,7 @@
 
 import { motion } from "framer-motion";
 import { useLocale, useTranslations } from "next-intl";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { Link } from "@/i18n/navigation";
 import { CONSENT_TEXT, POLICY_VERSION } from "@/content/legal/owner";
 import { SubmitButton } from "./SubmitButton";
@@ -173,9 +173,12 @@ function ContactForm() {
   const [consent, setConsent] = useState(false);
   const locale = useLocale() === "ru" ? "ru" : "uk";
   const consentText = CONSENT_TEXT[locale];
+  // Anti-spam time trap: when the form became usable.
+  const startedAtRef = useRef(0);
 
   useEffect(() => {
     setMounted(true);
+    startedAtRef.current = Date.now();
   }, []);
 
   async function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
@@ -193,6 +196,9 @@ function ContactForm() {
       consent: formData.get("consent") === "on",
       policyVersion: POLICY_VERSION,
       locale,
+      // Anti-spam: a hidden field people never see and the time spent on the form.
+      website: String(formData.get("website") ?? ""),
+      elapsedMs: Date.now() - startedAtRef.current,
     };
 
     try {
@@ -215,6 +221,7 @@ function ContactForm() {
       setStatus("success");
       form.reset();
       setConsent(false);
+      startedAtRef.current = Date.now();
     } catch {
       setStatus("error");
       setErrorMessage(t("errorGeneric"));
@@ -243,6 +250,11 @@ function ContactForm() {
 
   return (
     <form className="mt-6 space-y-4" onSubmit={handleSubmit}>
+      {/* Honeypot: hidden from people and screen readers, bots fill it in. */}
+      <div aria-hidden="true" className="absolute -left-[9999px] h-px w-px overflow-hidden">
+        <label htmlFor="website">Website</label>
+        <input id="website" name="website" type="text" tabIndex={-1} autoComplete="off" />
+      </div>
       <div>
         <label
           htmlFor="name"
